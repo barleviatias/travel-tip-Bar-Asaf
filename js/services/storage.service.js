@@ -1,9 +1,8 @@
-'use strict';
 
 export const storageService = {
 	getFromStorage,
-	saveToStorage,
-};
+	saveToStorage
+}
 
 function getFromStorage(key) {
 	return JSON.parse(localStorage.getItem(key));

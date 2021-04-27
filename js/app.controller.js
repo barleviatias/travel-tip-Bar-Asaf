@@ -13,6 +13,19 @@ function onInit() {
 }
 
 function addEventListenrs() {
+    // That function pan to my location (user location)
+    document.querySelector('.my-location-btn').addEventListener('click', (ev) => {
+        getPosition()
+        .then(pos => {
+            console.log('User position is:', pos.coords);
+            mapService.panTo(pos.coords.latitude, pos.coords.longitude)
+            // document.querySelector('.user-pos').innerText =
+            //     `Latitude: ${pos.coords.latitude} - Longitude: ${pos.coords.longitude}`
+        })
+        .catch(err => {
+            console.log('err!!!', err);
+        })
+    })
     document.querySelector('.btn-pan').addEventListener('click', (ev) => {
         console.log('Panning the Map');
         mapService.panTo(35.6895, 139.6917);
@@ -28,18 +41,6 @@ function addEventListenrs() {
                 document.querySelector('.locs').innerText = JSON.stringify(locs)
             })
 
-    })
-    document.querySelector('.btn-user-pos').addEventListener('click', (ev) => {
-        getPosition()
-            .then(pos => {
-                console.log('User position is:', pos.coords);
-                mapService.panTo(pos.coords.latitude, pos.coords.longitude)
-                // document.querySelector('.user-pos').innerText =
-                //     `Latitude: ${pos.coords.latitude} - Longitude: ${pos.coords.longitude}`
-            })
-            .catch(err => {
-                console.log('err!!!', err);
-            })
     })
 }
 
