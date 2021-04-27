@@ -108,12 +108,16 @@ function renderLocationsTable() {
         })
         document.querySelectorAll('.delete-location-btn').forEach(el => {
             el.addEventListener('click',(ev) =>{
-               console.log(ev.target.dataset.id)
+               onDeleteLocation(ev.target.dataset.id)
             })
         })
 
     })
+}
 
+// That function delete the location from the table
+function onDeleteLocation(locationId){
+    loc
 }
 
 
