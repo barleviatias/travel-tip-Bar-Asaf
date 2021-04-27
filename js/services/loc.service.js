@@ -36,7 +36,7 @@ function addLocation(newLocation) {
 	utilesService.saveToStorage(KEY, locs);
 }
 function deleteLocation(id) {
-	loc.splice(id, 1);
+	locs.splice(id, 1);
 	utilesService.saveToStorage(KEY, locs);
 }
 

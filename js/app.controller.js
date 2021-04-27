@@ -117,7 +117,8 @@ function renderLocationsTable() {
 
 // That function delete the location from the table
 function onDeleteLocation(locationId){
-    loc
+    locService.deleteLocation(locationId)
+    renderLocationsTable()
 }
 
 
