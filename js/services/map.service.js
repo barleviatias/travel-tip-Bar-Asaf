@@ -48,9 +48,6 @@ function getPosition() {
     })
 }
 
-function getLocationByAddress(){
-    
-}
 
 function _connectGoogleApi() {
     if (window.google) return Promise.resolve()
