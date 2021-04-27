@@ -27,7 +27,7 @@ function addEventListenrs() {
     // Close modal button
     document.querySelector('.close-btn').addEventListener('click', toggleModal)
     // Add location button
-    document.querySelector('.add-location-btn').addEventListener('click', addNewLocation)
+    document.querySelector('.add-location-btn').addEventListener('click', onAddNewLocation)
 }
 
 
@@ -69,7 +69,7 @@ function onClickMap(pos) {
 }
 
 // That function add new location by clicking add button 
-function addNewLocation() {
+function onAddNewLocation() {
     const txt = document.querySelector('input[name="location-name"]').value
     const newLocation = {
         name: txt,
@@ -94,13 +94,24 @@ function renderLocationsTable() {
             return `   <div class="location-card">
             <h3>${location.name}</h3>
            <div class="card-btns">
-                <button onclick="renderLocationOnMap(${location.lat},${location.lng},'${location.name}')" class="go-location-btn">Go</button>
-                <button onclick="onDeleteLocation(${location.id}) class="delete-location-btn">Delete</button>
+                <button data-name="${location.name}" data-lat="${location.lat}" data-lng="${location.lng}" class="go-location-btn">Go</button>
+                <button data-id="${location.id}" class="delete-location-btn">Delete</button>
              </div>
          </div>`
         })
-        // document.querySelector('.locations-table').innerHTML = strHtmls.join('')
-        // document.querySelectorAll('.go-location-btn').forEach((el.) => console.log(el))
+        document.querySelector('.locations-table').innerHTML = strHtmls.join('')
+        document.querySelectorAll('.go-location-btn').forEach(el => {
+            el.addEventListener('click',(ev) =>{
+                const {name,lat,lng} = ev.target.dataset
+                renderLocationOnMap(+lat,+lng,name)
+            })
+        })
+        document.querySelectorAll('.delete-location-btn').forEach(el => {
+            el.addEventListener('click',(ev) =>{
+               console.log(ev.target.dataset.id)
+            })
+        })
+
     })
 
 }
