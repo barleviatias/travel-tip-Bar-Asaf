@@ -3,6 +3,7 @@ export const mapService = {
 	addMarker,
 	panTo,
 	getPosition,
+	getMap
 };
 
 var gMap;
@@ -18,6 +19,11 @@ function initMap(lat = 32.6381922, lng = 35.093855) {
 		console.log('Map!', gMap);
 	});
 }
+
+function getMap(){
+	if(gMap) return gMap
+}
+
 
 function addMarker(loc, title) {
 	var marker = new google.maps.Marker({

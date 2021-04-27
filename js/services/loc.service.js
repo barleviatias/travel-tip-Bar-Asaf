@@ -23,6 +23,7 @@ function addLocation(res) {
         locs = utilesService.getFromStorage(KEY)
         id=locs.length-1
     }
+
 	locs.push({
 		id: utilesService.makeId(),
 		addressName: res.addressName,
@@ -30,6 +31,7 @@ function addLocation(res) {
 		lng: res.location.lng,
 		createdAt: Date.now(),
 	});
+	
     console.log('locs',locs);
 	utilesService.saveToStorage(KEY, locs);
 }
