@@ -13,22 +13,15 @@ function onInit() {
 }
 
 function addEventListenrs() {
-    // That function pan to my location (user location)
-    document.querySelector('.my-location-btn').addEventListener('click', (ev) => {
-        mapService.getPosition()
-        .then(pos => {
-            console.log('User position is:', pos.coords);
-            mapService.panTo(pos.coords.latitude, pos.coords.longitude)
-            // document.querySelector('.user-pos').innerText =
-            //     `Latitude: ${pos.coords.latitude} - Longitude: ${pos.coords.longitude}`
-        })
-        .catch(err => {
-            console.log('err!!!', err);
-        })
-    })
+    // My location button
+    document.querySelector('.my-location-btn').addEventListener('click', renderMyLocation)
+    // Go button on header
+    document.querySelector('.search-container button').addEventListener('click', onAddNewLocation)
+  
+
+    // That function take address from user input, go to new location, add new location
     document.querySelector('.btn-pan').addEventListener('click', (ev) => {
-        console.log('Panning the Map');
-        mapService.panTo(35.6895, 139.6917);
+      
     })
     document.querySelector('.btn-add-marker').addEventListener('click', (ev) => {
         console.log('Adding a marker');
@@ -43,4 +36,32 @@ function addEventListenrs() {
 
     })
 }
+
+
+// That function get pos and render on map
+function renderLocationOnMap(lat,lng){
+    mapService.panTo(lat,lng)
+    mapService.addMarker({lat: lat,lng: lng},'My Location')
+}
+
+// That function render my location
+function renderMyLocation(){
+    mapService.getPosition()
+    .then(pos => {
+        const {latitude,longitude} = pos.coords
+        renderLocationOnMap(latitude,longitude)
+    })
+    .catch(err => {
+        console.log('err!!!', err);
+    })
+}
+
+// That function get user input and add new location on map
+function onAddNewLocation(){
+    let address = document.querySelector('input[name="search-location"]').value
+    if(address.includes(' '))
+    address = address.split(' ').join('+')
+    console.log(address)
+}
+
 
