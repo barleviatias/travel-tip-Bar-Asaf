@@ -7,6 +7,7 @@ export const mapService = {
 };
 
 var gMap;
+var gMarker
 
 function initMap(lat = 32.6381922, lng = 35.093855) {
 	console.log('InitMap');
@@ -26,9 +27,8 @@ function getMap(){
 
 
 function addMarker(loc, title) {
-	var marker = new google.maps.Marker({
+	gMarker = new google.maps.Marker({
 		position: loc,
-		map: gMap,
 		title,
 	});
 
@@ -43,16 +43,14 @@ function addMarker(loc, title) {
 	const infowindow = new google.maps.InfoWindow({
 		content: contentString,
 	});
-	marker.addListener('click', () => {
-		infowindow.open(map, marker);
+	gMarker.addListener('click', () => {
+		infowindow.open(map, gMarker);
 	});
-	console.log(marker);
-	return marker;
+	gMarker.setMap(gMap)
 }
 
 function panTo(lat, lng) {
 	var laLatLng = new google.maps.LatLng(lat, lng);
-	console.log(laLatLng);
 	gMap.panTo(laLatLng);
 }
 

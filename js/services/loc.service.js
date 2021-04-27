@@ -8,7 +8,7 @@ export const locService = {
 import { utilesService } from './utiles.service.js';
 const KEY = 'DBlocation';
 const API_KEY = 'AIzaSyAfvktGRnTPT-aq4CfjmM3zi1jWHxqojY4'; //TODO: Enter your API Key
-var locs = [];
+var locs = utilesService.getFromStorage(KEY) || [];
 let id = 1;
 var currLocation;
 function getLocs() {
@@ -19,10 +19,6 @@ function getLocs() {
 	});
 }
 function addLocation(newLocation) {
-	if (utilesService.getFromStorage(KEY)) {
-		locs = utilesService.getFromStorage(KEY);
-	}
-
 	locs.push({
 		id: utilesService.makeId(),
 		name: newLocation.name,

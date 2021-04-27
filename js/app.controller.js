@@ -14,6 +14,7 @@ function onInit() {
             mapService.getMap().addListener("click", (mapsMouseEvent) => {
                 onClickMap(mapsMouseEvent.latLng.toJSON())
             })
+            renderLocationsTable()
         })
         .catch(() => console.log('Error: cannot init map'));
 }
@@ -34,7 +35,7 @@ function addEventListenrs() {
 // That function get pos and render on map
 function renderLocationOnMap(lat, lng, address) {
     mapService.panTo(lat, lng)
-    mapService.addMarker({ lat: lat, lng: lng }, address)
+    document.querySelector('.location-title h2 span').innerText = address
 }
 
 // That function render my location
@@ -77,7 +78,9 @@ function onAddNewLocation() {
         lng: clickedPos.lng
     }
     locService.addLocation(newLocation)
+    mapService.addMarker({ lat: newLocation.lat, lng:  newLocation.lng }, txt)
     renderLocationsTable()
+    toggleModal()
 }
 
 
