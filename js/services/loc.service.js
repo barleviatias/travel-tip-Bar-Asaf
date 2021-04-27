@@ -10,7 +10,7 @@ const KEY = 'DBlocation';
 const API_KEY = 'AIzaSyAfvktGRnTPT-aq4CfjmM3zi1jWHxqojY4'; //TODO: Enter your API Key
 var locs;
 var currLocation;
-getLocationByAddress('haifa+israel');
+
 function getLocs() {
 	return new Promise((resolve, reject) => {
 		setTimeout(() => {
@@ -39,7 +39,7 @@ function getLocationByAddress(address) {
 		.then((res) => {
 			const loc = res.data.results[0];
 			return {
-				addresName: loc.formatted_address,
+				addressName: loc.formatted_address,
 				location: loc.geometry.location,
 			};
 		})

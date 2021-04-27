@@ -1,29 +1,78 @@
+/* Normalize */
+
 @import './normalize.css';
 .app {
-    width: 100vw;
+	width: 100vw;
 	height: 100vh;
 	display: flex;
 	flex-direction: column;
 	background-color: aquamarine;
 }
+
+/* HEADER */
+
 header {
-    background-color: burlywood;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-}
-.location-container {
-    background-color: burlywood;
+	background-color: burlywood;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 }
 
-main{
-    display: flex;
-    justify-content: space-between;
+.location-container {
+	background-color: burlywood;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
-.map-container #map{
-    width: 100%;
-    height: 100%;
+
+/* MAIN */
+
+main {
+	display: flex;
+	justify-content: space-between;
 }
+
+/* map */
+
+#map {
+	flex-basis: 60%;
+	height: 80vh;
+}
+
+.details-container {
+	display: flex;
+}
+
+.weather-container {
+	background-color: bisque;
+}
+
+.locations-table {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.location-card {
+	padding: 1rem 0rem 1rem 1rem;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	background-color: rgb(255, 57, 57);
+	margin-bottom: 1rem;
+}
+
+.location-card h3 {
+	margin: 0 0 0;
+	font-size: 1rem;
+}
+
+.location-card .card-btns{
+	display: flex;
+}
+
+.location-card .card-btns button:first-of-type{
+	margin-inline-end: 1rem;
+}
+
