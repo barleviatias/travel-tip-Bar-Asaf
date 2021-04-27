@@ -3,7 +3,8 @@
 export const mapService = {
     initMap,
     addMarker,
-    panTo
+    panTo,
+    getPosition
 }
 
 var gMap;
@@ -22,11 +23,11 @@ function initMap(lat = 32.6381922, lng = 35.093855) {
         })
 }
 
-function addMarker(loc) {
+function addMarker(loc,title) {
     var marker = new google.maps.Marker({
         position: loc,
         map: gMap,
-        title: 'Hello World!'
+        title
     });
     console.log(marker);
     return marker;
@@ -39,6 +40,17 @@ function panTo(lat, lng) {
 }
 
 
+// This function provides a Promise API to the callback-based-api of getCurrentPosition
+function getPosition() {
+    console.log('Getting Pos');
+    return new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(resolve, reject)
+    })
+}
+
+function getLocationByAddress(){
+    
+}
 
 function _connectGoogleApi() {
     if (window.google) return Promise.resolve()

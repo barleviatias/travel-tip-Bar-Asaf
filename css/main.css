@@ -1,0 +1,29 @@
+@import './normalize.css';
+.app {
+    width: 100vw;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	background-color: aquamarine;
+}
+header {
+    background-color: burlywood;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.location-container {
+    background-color: burlywood;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+main{
+    display: flex;
+    justify-content: space-between;
+}
+.map-container #map{
+    width: 100%;
+    height: 100%;
+}

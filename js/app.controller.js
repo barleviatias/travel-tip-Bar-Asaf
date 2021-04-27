@@ -15,7 +15,7 @@ function onInit() {
 function addEventListenrs() {
     // That function pan to my location (user location)
     document.querySelector('.my-location-btn').addEventListener('click', (ev) => {
-        getPosition()
+        mapService.getPosition()
         .then(pos => {
             console.log('User position is:', pos.coords);
             mapService.panTo(pos.coords.latitude, pos.coords.longitude)
@@ -41,15 +41,6 @@ function addEventListenrs() {
                 document.querySelector('.locs').innerText = JSON.stringify(locs)
             })
 
-    })
-}
-
-
-// This function provides a Promise API to the callback-based-api of getCurrentPosition
-function getPosition() {
-    console.log('Getting Pos');
-    return new Promise((resolve, reject) => {
-        navigator.geolocation.getCurrentPosition(resolve, reject)
     })
 }
 
