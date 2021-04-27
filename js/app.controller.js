@@ -120,8 +120,3 @@ function onDeleteLocation(locationId){
     locService.deleteLocation(locationId)
     renderLocationsTable()
 }
-
-
-
-
-
