@@ -119,8 +119,8 @@ function renderLocationsTable() {
 			return `   <div class="location-card">
             <h3>${location.name}</h3>
            <div class="card-btns">
-                <button onclick="renderLocationOnMap(${location.lat},${location.lng},'${location.name}')" class="go-location-btn">Go</button>
-                <button onclick="onDeleteLocation(${location.id}) class="delete-location-btn">Delete</button>
+                <button data-name="${location.name}" data-lat="${location.lat}" data-lng="${location.lng}" class="go-location-btn">Go</button>
+                <button data-id="${location.id}" class="delete-location-btn">Delete</button>
              </div>
          </div>`;
 		});
