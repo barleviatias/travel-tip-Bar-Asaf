@@ -19,7 +19,7 @@ function addEventListenrs() {
     })
     document.querySelector('.btn-add-marker').addEventListener('click', (ev) => {
         console.log('Adding a marker');
-        mapService.addMarker({ lat: 32.0749831, lng: 34.9120554 });
+        mapService.addMarker({ lat: 35.6895, lng:  139.6917 });
     })
     document.querySelector('.btn-get-locs').addEventListener('click', (ev) => {
         locService.getLocs()
@@ -33,8 +33,9 @@ function addEventListenrs() {
         getPosition()
             .then(pos => {
                 console.log('User position is:', pos.coords);
-                document.querySelector('.user-pos').innerText =
-                    `Latitude: ${pos.coords.latitude} - Longitude: ${pos.coords.longitude}`
+                mapService.panTo(pos.coords.latitude, pos.coords.longitude)
+                // document.querySelector('.user-pos').innerText =
+                //     `Latitude: ${pos.coords.latitude} - Longitude: ${pos.coords.longitude}`
             })
             .catch(err => {
                 console.log('err!!!', err);

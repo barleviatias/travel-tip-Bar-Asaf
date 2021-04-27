@@ -8,7 +8,7 @@ export const mapService = {
 
 var gMap;
 
-function initMap(lat = 32.0749831, lng = 34.9120554) {
+function initMap(lat = 32.6381922, lng = 35.093855) {
     console.log('InitMap');
     return _connectGoogleApi()
         .then(() => {
@@ -28,11 +28,13 @@ function addMarker(loc) {
         map: gMap,
         title: 'Hello World!'
     });
+    console.log(marker);
     return marker;
 }
 
 function panTo(lat, lng) {
     var laLatLng = new google.maps.LatLng(lat, lng);
+    console.log(laLatLng);
     gMap.panTo(laLatLng);
 }
 
@@ -40,7 +42,7 @@ function panTo(lat, lng) {
 
 function _connectGoogleApi() {
     if (window.google) return Promise.resolve()
-    const API_KEY = ''; //TODO: Enter your API Key
+    const API_KEY = 'AIzaSyAfvktGRnTPT-aq4CfjmM3zi1jWHxqojY4'; //TODO: Enter your API Key
     var elGoogleApi = document.createElement('script');
     elGoogleApi.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}`;
     elGoogleApi.async = true;
