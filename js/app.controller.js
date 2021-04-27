@@ -65,7 +65,7 @@ function onAddNewLocation() {
         address = address.split(' ').join('+')
     locService.getLocationByAddress(address).then(res => {
         locService.addLocation(res)
-        // renderLocationsTable()
+        renderLocationsTable()
         renderLocationOnMap(res.location.lat, res.location.lng, res.addressName)
         document.querySelector('.location-title h2 span').innerText = res.addressName
     })
@@ -73,12 +73,12 @@ function onAddNewLocation() {
 
     // That function render a locations table
     function renderLocationsTable() {
-        const locations = locService.getLocations()
+        const locations = locService.getLocs()
         const strHtmls = locations.map(location=> {
             return `   <div class="location-card">
         <h3>${location.addressName}</h3>
         <div class="card-btns">
-            <button data-location="${location.position}" onclick="renderLocationOnMap(this.dataset.location)" class="go-location-btn">Go</button>
+            <button onclick="renderLocationOnMap(this.dataset.location)" class="go-location-btn">Go</button>
             <button class="delete-location-btn">Delete</button>
         </div>
     </div>`
