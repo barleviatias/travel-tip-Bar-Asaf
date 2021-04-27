@@ -1,16 +1,17 @@
 export const locService = {
 	getLocs,
-	creatLocation,
+	addLocation,
 	deleteLocation,
-    getLocationByAddress
+	getLocationByAddress,
 };
 
 import { storageService } from '../services/storage.service.js';
 const KEY = 'DBlocation';
 const API_KEY = 'AIzaSyAfvktGRnTPT-aq4CfjmM3zi1jWHxqojY4'; //TODO: Enter your API Key
-var locs;
+var locs=[];
+let id = 1;
 var currLocation;
-getLocationByAddress('haifa+israel');
+// getLocationByAddress('haifa+israel');
 function getLocs() {
 	return new Promise((resolve, reject) => {
 		setTimeout(() => {
@@ -19,12 +20,16 @@ function getLocs() {
 	});
 }
 function setCurrLocation() {}
-function creatLocation(name, lat, lng) {
+function addLocation(loc) {
 	locs = storageService.getFromStorage(KEY);
-	if (!locs) {
-		locs.push({ name, lat, lng });
-		storageService.saveToStorage(KEY, locs);
-	}
+	locs.push({
+		id: id++,
+		addresName: loc.addresName,
+		lat: loc.lat,
+		lng: loc.lng,
+		createdAt: Date.now(),
+	});
+	storageService.saveToStorage(KEY, locs);
 }
 function deleteLocation(id) {
 	loc.splice(id, 1);
