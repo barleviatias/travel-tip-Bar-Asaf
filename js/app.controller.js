@@ -122,9 +122,25 @@ function renderLocationsTable() {
                 <button data-name="${location.name}" data-lat="${location.lat}" data-lng="${location.lng}" class="go-location-btn">Go</button>
                 <button data-id="${location.id}" class="delete-location-btn">Delete</button>
              </div>
-         </div>`;
-		});
-		// document.querySelector('.locations-table').innerHTML = strHtmls.join('')
-		// document.querySelectorAll('.go-location-btn').forEach((el.) => console.log(el))
-	});
+         </div>`
+        })
+        document.querySelector('.locations-table').innerHTML = strHtmls.join('')
+        document.querySelectorAll('.go-location-btn').forEach(el => {
+            el.addEventListener('click',(ev) =>{
+                const {name,lat,lng} = ev.target.dataset
+                renderLocationOnMap(+lat,+lng,name)
+            })
+        })
+        document.querySelectorAll('.delete-location-btn').forEach(el => {
+            el.addEventListener('click',(ev) =>{
+               onDeleteLocation(ev.target.dataset.id)
+            })
+        })
+
+    })
+}
+
+// That function delete the location from the table
+function onDeleteLocation(locationId){
+    loc
 }
