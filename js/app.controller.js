@@ -57,7 +57,22 @@ function renderMyLocation() {
             console.log('err!!!', err);
         })
 }
-
+function onCopyAddress(){
+    function myFunction() {
+        /* Get the text field */
+        var copyText = document.getElementById("myInput");
+      
+        /* Select the text field */
+        copyText.select();
+        copyText.setSelectionRange(0, 99999); /* For mobile devices */
+      
+        /* Copy the text inside the text field */
+        document.execCommand("copy");
+      
+        /* Alert the copied text */
+        alert("Copied the text: " + copyText.value);
+      }
+}
 // That function get user input and add new location on map
 function onAddNewLocation() {
     let address = document.querySelector('input[name="search-location"]').value
@@ -65,7 +80,7 @@ function onAddNewLocation() {
         address = address.split(' ').join('+')
     locService.getLocationByAddress(address).then(res => {
         locService.addLocation(res)
-        renderLocationsTable()
+        // renderLocationsTable()
         renderLocationOnMap(res.location.lat, res.location.lng, res.addressName)
         document.querySelector('.location-title h2 span').innerText = res.addressName
     })
