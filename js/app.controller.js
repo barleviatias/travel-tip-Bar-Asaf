@@ -3,6 +3,9 @@ import { mapService } from './services/map.service.js'
 
 window.onload = onInit;
 
+
+let clickedPos = {}
+
 function onInit() {
     addEventListenrs();
     mapService.initMap()
@@ -15,37 +18,21 @@ function onInit() {
         .catch(() => console.log('Error: cannot init map'));
 }
 
+// That function add events listenrs
 function addEventListenrs() {
     // My location button
     document.querySelector('.my-location-btn').addEventListener('click', renderMyLocation)
     // Go button on header
     document.querySelector('.search-container button').addEventListener('click', onGoToLocation)
-    // Add map event listener
-
-        
-
-
-    // // That function take address from user input, go to new location, add new location
-    // document.querySelector('.btn-pan').addEventListener('click', (ev) => {
-
-    // })
-    // document.querySelector('.btn-add-marker').addEventListener('click', (ev) => {
-    //     console.log('Adding a marker');
-    //     mapService.addMarker({ lat: 35.6895, lng: 139.6917 });
-    // })
-    // document.querySelector('.btn-get-locs').addEventListener('click', (ev) => {
-    //     locService.getLocs()
-    //         .then(locs => {
-    //             console.log('Locations:', locs)
-    //             document.querySelector('.locs').innerText = JSON.stringify(locs)
-    //         })
-
-    // })
+    // Close modal button
+    document.querySelector('.close-btn').addEventListener('click', toggleModal)
+    // Add location button
+    document.querySelector('.add-location-btn').addEventListener('click', addNewLocation)
 }
 
 
 // That function get pos and render on map
-function renderLocationOnMap(lat, lng,address) {
+function renderLocationOnMap(lat, lng, address) {
     mapService.panTo(lat, lng)
     mapService.addMarker({ lat: lat, lng: lng }, address)
 }
@@ -92,32 +79,50 @@ function onAddNewLocation() {
     })
 }
 
-// That function add new location on clicking map
-function onClickMap(pos){
-   console.log(pos)
+// That function open input modal and save clicked position by clicking map
+function onClickMap(pos) {
+    toggleModal()
+    clickedPos = pos
 }
 
-    // That function render a locations table
-    function renderLocationsTable() {
-       locService.getLocs().then(res=> console.log(res))
-    //     const strHtmls = locations.map(location=> {
-    //         return `   <div class="location-card">
-    //     <h3>${location.addressName}</h3>
-    //     <div class="card-btns">
-    //         <button onclick="renderLocationOnMap(this.dataset.location)" class="go-location-btn">Go</button>
-    //         <button class="delete-location-btn">Delete</button>
-    //     </div>
-    // </div>`
-    //     })
-    //     document.querySelector('.locations-table').innerHTML = strHtmls.join('')
-    //     document.querySelectorAll('go-location-btn').forEach((el) =>{
-    //         el.addressName('click',(ev) =>{
-               
-    //         })
-    //     })
+// That function add new location by clicking add button 
+function addNewLocation() {
+    const txt = document.querySelector('input[name="location-name"]').value
+    const newLocation = {
+        name: txt,
+        lat: clickedPos.lat,
+        lng: clickedPos.lng
     }
+    locService.addLocation(newLocation)
+    renderLocationsTable()
+}
 
-    // That function render
+
+// That function toggle the input modal
+function toggleModal() {
+    document.querySelector('.input-modal').classList.toggle('active')
+    document.querySelector('.overlay').classList.toggle('active')
+}
+
+// That function render a locations table
+function renderLocationsTable() {
+    locService.getLocs().then(locations => {
+        const strHtmls = locations.map(location => {
+            return `   <div class="location-card">
+            <h3>${location.name}</h3>
+           <div class="card-btns">
+                <button onclick="renderLocationOnMap(${location.lat},${location.lng},'${location.name}')" class="go-location-btn">Go</button>
+                <button onclick="onDeleteLocation(${location.id}) class="delete-location-btn">Delete</button>
+             </div>
+         </div>`
+        })
+        // document.querySelector('.locations-table').innerHTML = strHtmls.join('')
+        // document.querySelectorAll('.go-location-btn').forEach((el.) => console.log(el))
+    })
+
+}
+
+
 
 
 

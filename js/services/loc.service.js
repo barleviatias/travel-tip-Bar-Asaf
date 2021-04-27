@@ -18,7 +18,7 @@ function getLocs() {
 		}, 2000);
 	});
 }
-function addLocation(res) {
+function addLocation(newLocation) {
     if(utilesService.getFromStorage(KEY)){
         locs = utilesService.getFromStorage(KEY)
         id=locs.length-1
@@ -26,10 +26,10 @@ function addLocation(res) {
 
 	locs.push({
 		id: utilesService.makeId(),
-		addressName: res.addressName,
-		lat: res.location.lat,
-		lng: res.location.lng,
-		createdAt: Date.now(),
+		name: newLocation.name,
+		lat: newLocation.lat,
+		lng: newLocation.lng,
+		createdAt: Date.now()
 	});
 	
     console.log('locs',locs);
