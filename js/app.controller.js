@@ -61,7 +61,10 @@ function onAddNewLocation(){
     let address = document.querySelector('input[name="search-location"]').value
     if(address.includes(' '))
     address = address.split(' ').join('+')
-    console.log(address)
+    // const prm=locService.getLocationByAddress(address)
+    locService.getLocationByAddress(address).then(res=>renderLocationOnMap(res.location.lat,res.location.lng))
+    
+    // console.log(prm)
 }
 
 
