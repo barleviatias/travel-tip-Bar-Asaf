@@ -5,17 +5,12 @@ export const locService = {
 	getLocationByAddress,
 };
 
-import { storageService } from '../services/storage.service.js';
+import {utilesService } from './utiles.service.js';
 const KEY = 'DBlocation';
 const API_KEY = 'AIzaSyAfvktGRnTPT-aq4CfjmM3zi1jWHxqojY4'; //TODO: Enter your API Key
 var locs=[];
 let id = 1;
 var currLocation;
-<<<<<<< HEAD
-
-=======
-// getLocationByAddress('haifa+israel');
->>>>>>> 95409c653e3bb23424ebdc3a9f9e50cf97fa2c83
 function getLocs() {
 	return new Promise((resolve, reject) => {
 		setTimeout(() => {
@@ -23,21 +18,24 @@ function getLocs() {
 		}, 2000);
 	});
 }
-function setCurrLocation() {}
-function addLocation(loc) {
-	locs = storageService.getFromStorage(KEY);
+function addLocation(res) {
+    if(utilesService.getFromStorage(KEY)){
+        locs = utilesService.getFromStorage(KEY)
+        id=locs.length-1
+    }
 	locs.push({
-		id: id++,
-		addresName: loc.addresName,
-		lat: loc.lat,
-		lng: loc.lng,
+		id: utilesService.makeId(),
+		addressName: res.addressName,
+		lat: res.location.lat,
+		lng: res.location.lng,
 		createdAt: Date.now(),
 	});
-	storageService.saveToStorage(KEY, locs);
+    console.log('locs',locs);
+	utilesService.saveToStorage(KEY, locs);
 }
 function deleteLocation(id) {
 	loc.splice(id, 1);
-	storageService.saveToStorage(KEY, locs);
+	utilesService.saveToStorage(KEY, locs);
 }
 
 function getLocationByAddress(address) {
@@ -53,9 +51,6 @@ function getLocationByAddress(address) {
 			};
 		})
 		.catch((err) => console.log(err));
-	// prm.then(res=>console.log(res))
 }
 
-//TODO - Creat location func {id, name, lat, lng, weather, createdAt, updatedAt}
 
-// add loCAL STORAGE
