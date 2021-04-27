@@ -8,6 +8,9 @@ function onInit() {
     mapService.initMap()
         .then(() => {
             console.log('Map is ready');
+            mapService.getMap().addListener("click", (mapsMouseEvent) => {
+                onClickMap(mapsMouseEvent.latLng.toJSON())
+            })
         })
         .catch(() => console.log('Error: cannot init map'));
 }
@@ -16,7 +19,10 @@ function addEventListenrs() {
     // My location button
     document.querySelector('.my-location-btn').addEventListener('click', renderMyLocation)
     // Go button on header
-    document.querySelector('.search-container button').addEventListener('click', onAddNewLocation)
+    document.querySelector('.search-container button').addEventListener('click', onGoToLocation)
+    // Add map event listener
+
+        
 
 
     // // That function take address from user input, go to new location, add new location
@@ -86,25 +92,32 @@ function onAddNewLocation() {
     })
 }
 
+// That function add new location on clicking map
+function onClickMap(pos){
+   console.log(pos)
+}
+
     // That function render a locations table
     function renderLocationsTable() {
-        const locations = locService.getLocs()
-        const strHtmls = locations.map(location=> {
-            return `   <div class="location-card">
-        <h3>${location.addressName}</h3>
-        <div class="card-btns">
-            <button onclick="renderLocationOnMap(this.dataset.location)" class="go-location-btn">Go</button>
-            <button class="delete-location-btn">Delete</button>
-        </div>
-    </div>`
-        })
-        document.querySelector('.locations-table').innerHTML = strHtmls.join('')
-        document.querySelectorAll('go-location-btn').forEach((el) =>{
-            el.addressName('click',(ev) =>{
+       locService.getLocs().then(res=> console.log(res))
+    //     const strHtmls = locations.map(location=> {
+    //         return `   <div class="location-card">
+    //     <h3>${location.addressName}</h3>
+    //     <div class="card-btns">
+    //         <button onclick="renderLocationOnMap(this.dataset.location)" class="go-location-btn">Go</button>
+    //         <button class="delete-location-btn">Delete</button>
+    //     </div>
+    // </div>`
+    //     })
+    //     document.querySelector('.locations-table').innerHTML = strHtmls.join('')
+    //     document.querySelectorAll('go-location-btn').forEach((el) =>{
+    //         el.addressName('click',(ev) =>{
                
-            })
-        })
+    //         })
+    //     })
     }
+
+    // That function render
 
 
 
